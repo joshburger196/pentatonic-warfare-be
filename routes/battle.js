@@ -3,7 +3,7 @@ const router = express.Router();
 
 router.get('/',(req,res)=>
 {
-    battleObj=
+    battleObj={"Band":"Band"}
     res.send({"message":"Battle Start","battleObj":battleObj});
 })
 
