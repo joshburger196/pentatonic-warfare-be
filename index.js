@@ -20,4 +20,7 @@ app.use("/battle",battleRouter);
 const accountRouter = require("./routes/account")
 app.use("/account",accountRouter);
 
+const assetsRouter = require("./routes/assets")
+app.use("/assets",assetsRouter);
+
 app.listen(3000);

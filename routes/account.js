@@ -9,37 +9,21 @@ router.get('/',(req,res)=>
     res.send({"message":"Account"});
 })
 
-router.get('/info',(req,res)=>{
-    res.send({"Message":"Account info. Please send account id."})
-})
-
-router.get('/info/:id',async (req,res)=>
+router.get('/:id',async (req,res)=>
 {
     if(isAccountIdValid(req.params.id))
     {
         console.log("account id is valid");
-        let [[dbResponse]]=await getAccountInfo(req.params.id);
-        console.log(dbResponse);
-        res.send({"Account-info":dbResponse});
+        let accInfoDBResponse=await getAccountInfo(req.params.id);
+        console.log(accInfoDBResponse);
+        let accMusicDBResponse=await getAccountMusicians(req.params.id);
+        console.log(accMusicDBResponse);
+
+        res.send({"account_info":accInfoDBResponse,"account_musicians":accMusicDBResponse});
     }
     else
         res.send({"Error":"Server Error: Input Account Id is invalid. Must start with 'A' and end with 11 numeric digits."})
 })
-
-router.get('/musicians/:id',async (req,res)=>
-{
-    console.log(req.params.id);
-    if(isAccountIdValid(req.params.id))
-    {
-        let [dbResponse]=await getAccountMusicians(req.params.id);
-        let resLength=dbResponse.length
-        console.log(dbResponse);
-        res.send({"n":resLength,"Musicians":dbResponse});
-    }
-    else
-    res.send({"Error":"Server Error: Input Account Id is invalid. Must start with 'A' and end with 11 numeric digits."})
-})
-
 
 
 function isAccountIdValid(id)

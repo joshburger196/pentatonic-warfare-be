@@ -13,16 +13,23 @@ const pool = mySql.createPool(
 
 async function getAccountInfo(accountId)
 {
-    const [queryResponse] = await pool.query(`CALL get_account_info(?)`,accountId);
+    const [[[queryResponse]]] = await pool.query(`CALL get_account_info(?)`,accountId);
     console.log(`I'm getAccountInfo and I'm returning:${JSON.stringify(queryResponse)}`);
     return queryResponse;
 }
 
 async function getAccountMusicians(accountId)
 {
-    const [queryResponse] = await pool.query(`CALL get_account_musicians(?)`,accountId);
+    const [[queryResponse]] = await pool.query(`CALL get_account_musicians(?)`,accountId);
     console.log(`I'm getAccountMusicians and I'm returning:${JSON.stringify(queryResponse)}`);
     return queryResponse;
 }
 
-module.exports={getAccountInfo,getAccountMusicians}
+async function getTechniques(accountId)
+{
+    const [[queryResponse]] = await pool.query(`CALL get_all_techniques()`);
+    console.log(`I'm getTechniques and I'm returning:${JSON.stringify(queryResponse)}`);
+    return queryResponse;
+}
+
+module.exports={getAccountInfo,getAccountMusicians,getTechniques}
