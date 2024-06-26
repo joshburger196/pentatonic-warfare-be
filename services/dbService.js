@@ -27,9 +27,30 @@ async function getAccountMusicians(accountId)
 
 async function getTechniques(accountId)
 {
-    const [[queryResponse]] = await pool.query(`CALL get_all_techniques()`);
+    const [[queryResponse]] = await pool.query(`CALL get_techniques()`);
     console.log(`I'm getTechniques and I'm returning:${JSON.stringify(queryResponse)}`);
     return queryResponse;
 }
 
-module.exports={getAccountInfo,getAccountMusicians,getTechniques}
+async function getTemplates(accountId)
+{
+    const [[queryResponse]] = await pool.query(`CALL get_templates()`);
+    console.log(`I'm getTechniques and I'm returning:${JSON.stringify(queryResponse)}`);
+    return queryResponse;
+}
+
+async function getLearnableTechniques(accountId)
+{
+    const [[queryResponse]] = await pool.query(`CALL get_learnable_techniques()`);
+    console.log(`I'm getTechniques and I'm returning:${JSON.stringify(queryResponse)}`);
+    return queryResponse;
+}
+
+async function getEffects(accountId)
+{
+    const [[queryResponse]] = await pool.query(`CALL get_effects()`);
+    console.log(`I'm getTechniques and I'm returning:${JSON.stringify(queryResponse)}`);
+    return queryResponse;
+}
+
+module.exports={getAccountInfo,getAccountMusicians,getTechniques,getTemplates,getLearnableTechniques,getEffects}
