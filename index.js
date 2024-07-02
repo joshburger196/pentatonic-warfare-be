@@ -14,9 +14,6 @@ app.get("/",(req,res)=>
     res.send("hallo");
 })
 
-const battleRouter = require("./routes/battle")
-app.use("/battle",battleRouter);
-
 const accountRouter = require("./routes/account")
 app.use("/account",accountRouter);
 
