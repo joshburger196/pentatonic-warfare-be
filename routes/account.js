@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const {getAccountInfo,getAccountMusicians} =require("../services/dbService")
+const {getAccountInfo,getAccountMusicians,getAccountBands} =require("../services/dbService")
 
 
 
@@ -18,8 +18,10 @@ router.get('/:id',async (req,res)=>
         console.log(accInfoDBResponse);
         let accMusicDBResponse=await getAccountMusicians(req.params.id);
         console.log(accMusicDBResponse);
+        let accBandsDBResponse=await getAccountBands(req.params.id);
+        console.log(accMusicDBResponse);
 
-        res.send({"account_info":accInfoDBResponse,"account_musicians":accMusicDBResponse});
+        res.send({"account_info":accInfoDBResponse,"account_musicians":accMusicDBResponse,"account_bands":accBandsDBResponse});
     }
     else
         res.send({"Error":"Server Error: Input Account Id is invalid. Must start with 'A' and end with 11 numeric digits."})

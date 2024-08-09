@@ -25,6 +25,13 @@ async function getAccountMusicians(accountId)
     return queryResponse;
 }
 
+async function getAccountBands(accountId)
+{
+    const [[queryResponse]] = await pool.query(`CALL get_account_bands(?)`,accountId);
+    console.log(`I'm getAccountBands and I'm returning:${JSON.stringify(queryResponse)}`);
+    return queryResponse;
+}
+
 async function getTechniques(accountId)
 {
     const [[queryResponse]] = await pool.query(`CALL get_techniques()`);
@@ -53,4 +60,4 @@ async function getEffects(accountId)
     return queryResponse;
 }
 
-module.exports={getAccountInfo,getAccountMusicians,getTechniques,getTemplates,getLearnableTechniques,getEffects}
+module.exports={getAccountInfo,getAccountMusicians,getAccountBands,getTechniques,getTemplates,getLearnableTechniques,getEffects}
